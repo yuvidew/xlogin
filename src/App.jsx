@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 
 const App = () => {
-  const [alert , setAlert] = useState(<></>)
+  const [alert , setAlert] = useState('')
+  const [isTrue , setIsTrue] = useState(false)
   const [form , setForm] = useState({
     username : '',
     password : '',
@@ -19,9 +20,10 @@ const App = () => {
   const onSubmit = () => {
 
     if(form.password == 'password' && form.username == 'user'){
-      setAlert(<p>Welcome , user</p>)
+      setAlert("")
+      setIsTrue(true)
     }else{
-      setAlert(<p>Invalid username or password</p>)
+      setAlert('Invalid username or password')
     }
   }
   return (
@@ -30,42 +32,50 @@ const App = () => {
     }}>
       <h1>Login Page</h1>
 
-      <form action="" onSubmit={(e) => {
-        e.preventDefault()
-        onSubmit()
-      }}>
-        {alert}
-        <div 
-        style={{
-          display : 'flex',
-          alignItems : 'center',
-          gap : '1rem'
-        }}>
-          <label htmlFor="">
-            username : 
-          </label>
-          <input style={{
-            padding :  '.4rem 1rem'
-          }} value={form.username} name = 'username'  onChange={onChange}  placeholder='username' required />
-        </div>
-        <br />
-        <div style={{
-          display : 'flex',
-          alignItems : 'center',
-          gap : '1rem'
-        }}>
-          <label htmlFor="">
-            password : 
-          </label> {" "}
-          <input style={{
-            padding :  '.4rem 1rem'
-          }} value={form.password} type='password' name = 'password' onChange={onChange} placeholder='password' required />
-        </div>
+      {alert && <p>{alert}</p>}
 
-        <br />
+      {isTrue ? (
+        <p>Welcome , {form.username}</p>
+      ) : (
+        <form action="" onSubmit={(e) => {
+          e.preventDefault()
+          onSubmit()
+        }}>
+          {alert && <p>{Error}</p>}
 
-        <button >Submit</button>
-      </form>
+
+          <div 
+          style={{
+            display : 'flex',
+            alignItems : 'center',
+            gap : '1rem'
+          }}>
+            <label htmlFor="">
+              username : 
+            </label>
+            <input style={{
+              padding :  '.4rem 1rem'
+            }} value={form.username} name = 'username'  onChange={onChange}  placeholder='username' required />
+          </div>
+          <br />
+          <div style={{
+            display : 'flex',
+            alignItems : 'center',
+            gap : '1rem'
+          }}>
+            <label htmlFor="">
+              password : 
+            </label> {" "}
+            <input style={{
+              padding :  '.4rem 1rem'
+            }} value={form.password} type='password' name = 'password' onChange={onChange} placeholder='password' required />
+          </div>
+
+          <br />
+
+          <button >Submit</button>
+        </form>
+      )}
     </div>
   )
 }
