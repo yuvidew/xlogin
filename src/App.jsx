@@ -33,6 +33,7 @@ function App() {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
+            <br />
             <label htmlFor="password">Password:</label>
             <input  
               type='password' 
@@ -40,6 +41,8 @@ function App() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <br />
+            <br />
             <button type='submit'>Submit</button>
           </form>
         )}
